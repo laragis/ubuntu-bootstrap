@@ -62,7 +62,7 @@ alias v="vagrant"
 alias bat="batcat"
 
 # show file previews for fzf using bat
-alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+alias fp="fzf --preview 'batcat --style=numbers --color=always --line-range :500 {}'"
 
 # map exa commands to normal ls commands
 alias ll="exa -l -g --icons"
