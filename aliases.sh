@@ -67,6 +67,14 @@ alias ll="exa -l -g --icons"
 alias ls="exa --icons"
 alias lt="exa --tree --icons -a -I '.git|__pycache__|.mypy_cache|.ipynb_checkpoints'"
 
+# Docker
+alias dc="docker compose"
+alias dcu="docker compose up"
+alias dcud="docker compose up -d"
+alias dcd"docker compose down"
+alias dcdd="docker compose down -d"
+alias dce="docker compose exec"
+
 ################################################################################
 # End - My Used Aliases
 ################################################################################
