@@ -6,7 +6,7 @@ if [ $(id -u) -ne 0 ];
 fi
 
 apt-get update
-# apt-get upgrade -y
+apt-get upgrade -y
 
 ################################################################################
 # Basic & Advanced
@@ -21,15 +21,42 @@ basic_setup(){
 
 advanced_setup(){
   apt install -y \
-    htop exa bat ncdu tldr
-
-  # Install fzf fd
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  echo 'y' | ~/.fzf/install
+    htop exa bat ncdu tldr cargo
 
   # Install duf
   wget -P /tmp https://github.com/muesli/duf/releases/download/v0.8.1/duf_0.8.1_linux_amd64.deb
   dpkg -i /tmp/duf_0.8.1_linux_amd64.deb && rm -rf /tmp/duf_0.8.1_linux_amd64.deb
+
+  # Install enhancd
+  git clone https://github.com/b4b4r07/enhancd ~/.enhancd
+  echo "source ~/.enhancd/init.sh"  >> ~/.bash_profile
+  source ~/.bash_profile
+
+  # Install procs
+  cargo install procs
+
+  # Install sd
+  cargo install sd
+}
+
+################################################################################
+# Fzf - depend zsh
+################################################################################
+
+fzf_setup(){
+  # Install fzf - depend zsh
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  echo 'y' | ~/.fzf/install
+}
+
+################################################################################
+# Cargo
+################################################################################
+
+cargo_setup(){
+  curl https://sh.rustup.rs -sSf | sh -s -- -y
+  echo -n '\n source "$HOME/.cargo/env"' >> ~/.zshrc
+  source "$HOME/.cargo/env"
 }
 
 ################################################################################
@@ -37,9 +64,6 @@ advanced_setup(){
 ################################################################################
 
 sd_setup(){
-  curl https://sh.rustup.rs -sSf | sh -s -- -y
-  echo -n '\n source "$HOME/.cargo/env"' >> ~/.zshrc
-  exec zsh
   cargo install sd
 }
 
@@ -48,18 +72,21 @@ sd_setup(){
 ################################################################################
 
 zsh_setup(){
-    # Install Zsh
-    apt install -y zsh
-    # Switch from bash to zsh
-    chsh -s $(which zsh)
+  # Install Zsh
+  apt install -y zsh
+  # Switch from bash to zsh
+  chsh -s $(which zsh)
 }
 
 ohmyzsh_setup(){
-    # Install Oh My Zsh
-    echo "y" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  # Install Oh My Zsh
+  echo "y" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
 zinit_setup(){
+  # Required
+  apt install -y file
+
   # Install Zinit
   echo "y" | bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 
@@ -73,12 +100,14 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-history-substring-search
 zinit light agkozak/zsh-z
 
+# Binary release in archive, from GitHub-releases page.
+# After automatic unpacking it provides program "fzf".
+zi ice from"gh-r" as"program"
+zi light junegunn/fzf
+
 # Snippet
 zinit snippet https://raw.githubusercontent.com/laragis/ubuntu-bootstrap/main/aliases.sh
 EOF
-
-  # Reload Zsh
-  exec zsh
 }
 
 ################################################################################
@@ -103,10 +132,12 @@ ssh_setup(){
 ################################################################################
 
 basic_setup
-advanced_setup
 
 zsh_setup
 ohmyzsh_setup
 zinit_setup
 
+advanced_setup
 
+# Reload Zsh
+exec zsh
