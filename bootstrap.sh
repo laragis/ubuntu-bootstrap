@@ -21,7 +21,7 @@ basic_setup(){
 
 advanced_setup(){
   apt install -y \
-    htop exa bat ncdu tldr cargo
+    htop exa bat ncdu tldr
 
   # Install duf
   wget -P /tmp https://github.com/muesli/duf/releases/download/v0.8.1/duf_0.8.1_linux_amd64.deb
@@ -32,11 +32,26 @@ advanced_setup(){
   echo "source ~/.enhancd/init.sh"  >> ~/.bash_profile
   source ~/.bash_profile
 
-  # Install procs
-  cargo install procs
+  # Install cargo
+  apt install -y cargo
 
-  # Install sd
-  cargo install sd
+  echo "" >> ~/.bashrc && echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
+  source ~/.bashrc
+
+  # Install procs
+  cargo install \
+    procs \
+    sd
+}
+
+################################################################################
+# Cargo
+################################################################################
+
+cargo_setup(){
+  curl https://sh.rustup.rs -sSf | sh -s -- -y
+  echo -n 'source "$HOME/.cargo/env"' >> ~/.zshrc
+  source "$HOME/.cargo/env"
 }
 
 ################################################################################
@@ -49,23 +64,6 @@ fzf_setup(){
   echo 'y' | ~/.fzf/install
 }
 
-################################################################################
-# Cargo
-################################################################################
-
-cargo_setup(){
-  curl https://sh.rustup.rs -sSf | sh -s -- -y
-  echo -n '\n source "$HOME/.cargo/env"' >> ~/.zshrc
-  source "$HOME/.cargo/env"
-}
-
-################################################################################
-# Sd
-################################################################################
-
-sd_setup(){
-  cargo install sd
-}
 
 ################################################################################
 # Zsh
