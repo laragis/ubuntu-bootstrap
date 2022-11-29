@@ -103,9 +103,10 @@ ssh_setup(){
 ################################################################################
 
 basic_setup
+advanced_setup
 
 zsh_setup
 ohmyzsh_setup
 zinit_setup
 
-advanced_setup
+
