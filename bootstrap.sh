@@ -32,16 +32,16 @@ advanced_setup(){
   echo "source ~/.enhancd/init.sh"  >> ~/.bash_profile
   source ~/.bash_profile
 
-  # Install cargo
-  apt install -y cargo
+#   # Install cargo
+#   apt install -y cargo
 
-  echo "" >> ~/.bashrc && echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
-  source ~/.bashrc
+#   echo "" >> ~/.bashrc && echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
+#   source ~/.bashrc
 
-  # Install procs
-  cargo install \
-    procs \
-    sd
+#   # Install procs
+#   cargo install \
+#     procs \
+#     sd
 }
 
 ################################################################################
