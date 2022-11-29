@@ -42,11 +42,7 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 alias home="cd ~"
 
-alias h="helm"
-alias k="kubectl"
-alias v="vagrant"
-
-# alias h="history"
+alias h="history"
 alias j="jobs"
 alias e='exit'
 alias c="clear"
@@ -55,6 +51,25 @@ alias cll="clear && ls -l"
 alias cls="clear && ls"
 alias code="cd /var/www"
 alias ea="vi ~/aliases.sh"
+
+################################################################################
+# My Used Aliases
+################################################################################
+alias he="helm"
+alias k="kubectl"
+alias v="vagrant"
+
+# show file previews for fzf using bat
+alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+
+# map exa commands to normal ls commands
+alias ll="exa -l -g --icons"
+alias ls="exa --icons"
+alias lt="exa --tree --icons -a -I '.git|__pycache__|.mypy_cache|.ipynb_checkpoints'"
+
+################################################################################
+# End - My Used Aliases
+################################################################################
 
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
