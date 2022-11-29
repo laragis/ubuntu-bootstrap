@@ -42,7 +42,11 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 alias home="cd ~"
 
-alias h="history"
+alias h="helm"
+alias k="kubectl"
+alias v="vagrant"
+
+# alias h="history"
 alias j="jobs"
 alias e='exit'
 alias c="clear"
