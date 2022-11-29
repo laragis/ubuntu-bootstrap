@@ -59,6 +59,8 @@ alias he="helm"
 alias k="kubectl"
 alias v="vagrant"
 
+alias bat="batcat"
+
 # show file previews for fzf using bat
 alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
